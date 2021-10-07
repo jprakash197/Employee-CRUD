@@ -62,7 +62,7 @@ public class EmployeeController {
 			throws EmployeeManagementServiceException {
 		return ResponseEntity.status(HttpStatus.GONE)
 				.body(new ResponseDTO("Valid API to delete an employee by id", true, false,
-						employeeService.deleteEmployeeById(id), "CREATED"));
+						employeeService.deleteEmployeeById(id), "DELETED"));
 	}
 
 	@PutMapping("/employees/{id}")

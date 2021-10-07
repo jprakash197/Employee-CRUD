@@ -1,6 +1,7 @@
 package com.mindtree.employeemanagementapp.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -58,10 +59,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public EmployeeDTO updatedEmployeeById(@Valid int id, EmployeeWithoutIdDTO employeeWithoutIdDTO) {
-		Employee employee=(Employee) employeeRepository.findAll().stream().filter(e->e.getId()==id);
+		Employee employee=employeeRepository.findById(id).get();
 		employee.setName(employeeWithoutIdDTO.getName());
 		employee.setCompitency(employeeWithoutIdDTO.getCompitency());
 		employee.setYearOfJoining(employeeWithoutIdDTO.getYearOfJoining());
+		employeeRepository.save(employee);
 		return  modelMapper.map(employee, EmployeeDTO.class);
 	}
 
